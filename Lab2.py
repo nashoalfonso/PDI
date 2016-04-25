@@ -1,25 +1,26 @@
 #! /usr/bin/env python
 
-from SimpleCV import Camera, Display, Image
-from sklearn.cluster import KMeans
+from SimpleCV import Image, Camera, Display, Image
+import time
 import matplotlib.pyplot as plt
-import argparse
-import utils
-import cv2
 
-c = Camera()
-img = c.getImage()
-img.save("PDI-image-n.png")
-figure(1)
-img.show()
+cam = Camera()
+img = cam.getImage()
+img.save("cart.jpg")
 
-imgGray = img.grayscale()
-figure(2)
-imgGray.show()
 
-# aqui hay que elegir entre estas 2 opciones
+imc = Image('cart.jpg')
+imcGray = imc.grayscale()
+imcGray.save('cartgris.jpg')
 
-# Opcion 1: histograma sobre escala de grises
+hist = imcGray.histogram(255)
+plt.figure(1)
+plt.stem(hist)
+plt.axis('tight')
+plt.savefig('hist.png')
 
-hist = imgGray.histogram(255)		# histograma de lo3 colores juntos
-plot(hist)
+
+
+
+
+
